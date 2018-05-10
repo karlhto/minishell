@@ -1,6 +1,5 @@
-/**
- * Minishell.
- * Small program for emulating shell.
+/*! \file   main.c
+ * Entry point of minishell.
  */
 #include "shell.h"
 #include "util.h"

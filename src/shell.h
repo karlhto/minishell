@@ -1,3 +1,6 @@
+/*! \file   shell.h
+ *
+ */
 #ifndef __SHELL_H__MINISHELL
 #define __SHELL_H__MINISHELL
 
