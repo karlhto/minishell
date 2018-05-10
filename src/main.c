@@ -19,12 +19,14 @@
  * @return	EXIT_SUCCESS
  */
 int main(void) {
-    DLOG("test(): %s\n", "failed doing stuff");
-
     if (run_shell()) {
         perror("run_shell()");
         exit(EXIT_FAILURE);
     }
 
     exit(EXIT_SUCCESS);
+}
+
+static void display_usage(char *filename) {
+    printf("Usage: %s\n", filename);
 }

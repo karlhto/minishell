@@ -10,8 +10,7 @@ without warranty.
 Compiling
 ---------
 Minishell requires your compiler to be able to compile with C11.
-Minishell is POSIX-compliant, and should compile on any system following the
-POSIX-standard.
+Minishell is POSIX-compliant.
 
 Compiling minishell:
 ```bash
@@ -29,3 +28,17 @@ Running minishell:
 cd bin
 ./minishell
 ```
+
+To run any program from within the shell, just write the name of the program.
+Like this:
+```bash
+echo blah
+blah
+```
+
+To be implemented
+-----------------
+Several features are currently missing. Here is a list:
+  - Running in different environments
+  - Truncating paths
+  - Doing backflips
