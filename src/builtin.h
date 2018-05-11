@@ -1,7 +1,17 @@
 #ifndef __BUILTIN_H__MINISHELL
 #define __BUILTIN_H__MINISHELL
 
-int run_builtin(char **args);
-int changedir(char **args);
+enum {
+    BUILTIN_ERROR = -1,
+    BUILTIN_NOT_FOUND,
+    BUILTIN_EXIT,
+    BUILTIN_SUCCESS,
+};
+
+int init_builtin();
+void free_builtin();
+void pwd_builtin();
+
+int exec_builtin(char **args);
 
 #endif

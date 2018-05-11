@@ -36,9 +36,20 @@ echo blah
 blah
 ```
 
+Builtin commands:
+`exit` exits the program
+`cd` changes directory of host process
+
 To be implemented
 -----------------
 Several features are currently missing. Here is a list:
-  - Running in different environments
-  - Truncating paths
-  - Doing backflips
+  - Run in different environments
+  - Truncate paths
+  - More builtin commands, like `help`
+  - Add args for a more interactive(?) debugging mode
+  - Implement redirects (write to files and similar)
+  - Implement a way to stop running processes without stopping the shell entirely
+  - Find a way to keep track of background processes
+  - Possibly find more efficient way to parse strings
+  - Add support for arrow keys
+  - Have more robust error checking
