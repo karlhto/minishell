@@ -47,7 +47,7 @@ char **str_splt(char *str, char *delims) {
  * Returned pointer needs to be freed.
  */
 char **str_splt_ws(char *str) {
-    return str_splt(str, " \t\n");
+    return str_splt(str, " \r\t\n");
 }
 
 /*! \fn parse_str

@@ -16,10 +16,9 @@
 #include <string.h>
 #include <unistd.h>
 
-
 static void sigact(int signo);
 
-static volatile int stop = 0;
+volatile sig_atomic_t stop;
 
 /*! \fn run_shell
  * \brief Contains event loop of shell.
@@ -44,12 +43,19 @@ int run_shell() {
         return -1;
     }
 
+    // will be replaced eventually
+    if (sigaction(SIGINT, &sa, NULL) == -1) {
+        perror("sigaction()");
+        return -1;
+    }
+
     if (init_builtin() == BUILTIN_ERROR)
         return -1;
 
     char line[256];
     while (!stop) {
         pwd_builtin();
+        printf("stop: %d", stop);
 
         if (fgets(line, sizeof(line), stdin)) {
             // TODO find a better solution to this, looks unintuitive
@@ -72,11 +78,11 @@ int run_shell() {
                         DLOG("Error encountered during builtin command, %d\n",
                                 ret);
                         ret = -1;
-                        stop = !stop;
+                        stop = 1;
                         break;
                     case BUILTIN_EXIT:
                         DLOG("Exiting program, %d\n", ret);
-                        stop = !stop;
+                        stop = 1;
                         break;
                     case BUILTIN_SUCCESS:
                         DLOG("Succesfully executed builtin command, %d\n",
@@ -107,6 +113,9 @@ int run_shell() {
 static void sigact(int signo) {
     switch (signo) {
         case SIGTERM:
+            stop = 1;
+            break;
+        case SIGINT:
             stop = 1;
             break;
     }

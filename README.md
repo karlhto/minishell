@@ -36,8 +36,8 @@ echo blah
 blah
 ```
 
-Builtin commands:
-`exit` exits the program
+Builtin commands: \\
+`exit` exits the program \\
 `cd` changes directory of host process
 
 To be implemented
