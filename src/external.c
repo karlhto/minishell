@@ -4,8 +4,10 @@
 #include "external.h"
 #include "strutil.h"
 
+#include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
 
 #ifdef __linux__
@@ -119,7 +121,7 @@ pid_t fork_proc(char **args, int in, int out) {
         }
 
         if (execvp(args[0], args)) {
-            perror("execvp()");
+            fprintf(stderr, "%s: %s", args[0], strerror(errno));
             exit(EXIT_FAILURE);
         }
 

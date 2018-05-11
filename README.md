@@ -53,3 +53,4 @@ Several features are currently missing. Here is a list:
   - Possibly find more efficient way to parse strings
   - Add support for arrow keys
   - Have more robust error checking
+  - Escape characters somehow
