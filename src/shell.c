@@ -43,7 +43,8 @@ int run_shell() {
         return -1;
     }
 
-    // will be replaced eventually
+    // will be replaced eventually, is supposed to kill active non-background
+    // children
     if (sigaction(SIGINT, &sa, NULL) == -1) {
         perror("sigaction()");
         return -1;
@@ -55,7 +56,6 @@ int run_shell() {
     char line[256];
     while (!stop) {
         pwd_builtin();
-        printf("stop: %d", stop);
 
         if (fgets(line, sizeof(line), stdin)) {
             // TODO find a better solution to this, looks unintuitive
