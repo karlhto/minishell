@@ -10,11 +10,11 @@
 #include "shell.h"
 #include "strutil.h"
 
+#include <errno.h>
 #include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <unistd.h>
 
 static void sigact(int signo);
 
@@ -32,8 +32,9 @@ volatile sig_atomic_t stop;
  */
 int run_shell() {
     int ret = 0;
-    struct sigaction sa;
+    stop = 0;
 
+    struct sigaction sa;
     sa.sa_handler = sigact;
     sigemptyset(&sa.sa_mask);
     sa.sa_flags = 0;
@@ -57,7 +58,14 @@ int run_shell() {
     while (!stop) {
         pwd_builtin();
 
-        if (fgets(line, sizeof(line), stdin)) {
+        char *ptr = fgets(line, sizeof(line), stdin);
+        if (!ptr) {
+            stop = 1;
+            if (errno != 0) {
+                perror("fgets()");
+                ret = -1;
+            }
+        } else {
             // TODO find a better solution to this, looks unintuitive
             int background = 1;
 
