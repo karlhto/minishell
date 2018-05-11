@@ -1,6 +1,10 @@
 /*! \file   shell.c
  * Has main event loop.
  */
+#ifdef __linux__
+#define _POSIX_SOURCE
+#endif
+
 #include "builtin.h"
 #include "external.h"
 #include "shell.h"
@@ -12,9 +16,6 @@
 #include <string.h>
 #include <unistd.h>
 
-#ifdef __linux__
-#include <bits/sigaction.h>
-#endif
 
 static void sigact(int signo);
 

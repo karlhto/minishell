@@ -25,7 +25,7 @@ char **str_splt(char *str, char *delims) {
 	int size = 1;
 
 	char *tmp = strtok(str, delims);
-	while (tmp) {
+	while (tmp != NULL) {
 		ret = realloc(ret, sizeof(char *) * ++size);
 		if (!ret) {
 			fprintf(stderr, "strsplt(): memory allocation failed\n");
